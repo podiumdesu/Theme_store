@@ -23,11 +23,12 @@
   .navbar-nav>li>a {padding-top: 10px;padding-bottom: 10px;}
   }
   h1{font-family: 'Montserrat Alternates', sans-serif;font-size: 36px;color:#fff;font-weight: normal;}
-  code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;border-radius: 4px;}
+  code{padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;border-radius: 4px;}
   .navbar-fixed-top .container{margin:0 15px;}
-  .content{margin: 53px 15px}
+  .content{margin: 53px auto;max-width: 1200px;}
   .wrap{width: 1000px;margin: auto}
   .breadcrumb {padding: 15px 30px;margin-bottom: 0px;}
+  .breadcrumb>.active a{color: #777;}
 </style>
 {% block style %}{% endblock %}
 </head>
@@ -68,7 +69,7 @@
   </nav>
   <div class="content">
     <ol class="breadcrumb">
-      <li class="active">Theme List</li>
+      <li class="active"><a href="/themestore/theme/index">Theme List</a></li>
       <li><a href="/themestore/upload">Upload Your Theme</a></li>
     </ol>
     {% block content %}{% endblock %}

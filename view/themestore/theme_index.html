@@ -15,7 +15,7 @@
 {% block content %}
   <div class="list">
   {% for item in themelist %}
-    <a class="item">
+    <a href="/themestore/theme/detail/{{item.theme_name}}" class="item">
       <div class="item-img">
         <img src="/static/img/{{item.theme_imgsrc}}.png" alt="{{item.theme_imgsrc}}">
       </div>
