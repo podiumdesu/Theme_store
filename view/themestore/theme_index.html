@@ -1,7 +1,7 @@
 {% extends "./parent.html" %}
 {% block style %}
 <style>
-.list{margin: 0 auto;padding: 0 30px;display: inline-flex;flex-wrap: wrap;}
+.list{margin: 0 auto;padding: 0;display: inline-flex;flex-wrap: wrap;}
 .list .item{position: relative;width:300px;background-color:#fff;margin-right: 20px;margin-bottom: 20px;box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);border-radius: 3px;transition: all 0.3s;}
 .list .item:hover{cursor: pointer;text-decoration: none;box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.5);}
 .list .item .step{position: absolute;width: 36px;height: 36px;top:-3px;left:0;border: 5px solid #4A6495;border-radius: 23px;text-align: center;line-height: 36px;}
@@ -15,7 +15,7 @@
 {% block content %}
   <div class="list">
   {% for item in themelist %}
-    <a href="/themestore/theme/detail/{{item.theme_name}}" class="item">
+    <a href="/themestore/theme/detail/id/{{item.theme_name}}" class="item">
       <div class="item-img">
         <img src="/static/img/{{item.theme_imgsrc}}.png" alt="{{item.theme_imgsrc}}">
       </div>
