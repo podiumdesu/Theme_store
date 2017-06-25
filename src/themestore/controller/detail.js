@@ -7,7 +7,7 @@ export default class extends Base {
    * index action
    * @return {Promise} []
    */
-  async indexAction(){
+  async indexAction(themeName){
     //auto render template file index_index.html
     let listModel = this.model('list');
     //let guid = listModel.newGUID();

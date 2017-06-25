@@ -10,11 +10,11 @@ export default {
   adapter: {
     mysql: {
       host: '127.0.0.1',
-      port: '',
-      database: '',
-      user: '',
-      password: '',
-      prefix: 'think_',
+      port: '3306',
+      database: 'theme',
+      user: 'root',
+      password: 'Kate6656959',
+      prefix: 'ts_',
       encoding: 'utf8'
     },
     mongo: {
