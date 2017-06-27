@@ -15,7 +15,7 @@
 {% block content %}
   <div class="list">
   {% for item in themelist %}
-    <a href="/themestore/theme/detail/id/{{item.theme_name}}" class="item">
+    <a href="/themestore/theme/detail/themename/{{item.theme_name}}" class="item">
       <div class="item-img">
         <img src="/static/img/{{item.theme_imgsrc}}.png" alt="{{item.theme_imgsrc}}">
       </div>
@@ -25,7 +25,7 @@
     </a>
     <div></div>
     {% else %}
-      <li>There are no downloadable themes yet!</li>
+      <p>There are no downloadable themes yet!</p>
     {% endfor %}
   </div>
 {% endblock %}
