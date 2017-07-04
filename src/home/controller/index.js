@@ -22,17 +22,9 @@ export default class extends Base {
 
     //auto render template file index_index.html
 
-    let param = qs.stringify({
-      client_id: 'efaf9351830c99050b36',
-      redirect_uri: 'http://127.0.0.1:8360/user/login/callback',
-      scope: 'user,public_repo',
-      state: "true" || ""
-    });
-    this.assign({param:param});
-
-    //读缓存
+    //读用户缓存
     let userInfo = await this.session('userInfo');
-    this.assign({userInfo:userInfo})
+    this.assign({userInfo:userInfo});
     return this.display();
   }
 }
