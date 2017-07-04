@@ -7,7 +7,7 @@ export default {
   name: 'thinkjs',
   type: 'file',
   secret: '%!VMDJ)I',
-  timeout: 24 * 3600,
+  timeout: 96 * 3600,
   cookie: { // cookie options
     length: 32,
     httponly: true
