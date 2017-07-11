@@ -13,21 +13,27 @@
 {% endblock %}
 
 {% block content %}
-  <div class="list">
-  {% for item in themelist %}
-    <a href="/themestore/theme/detail/themename/{{item.theme_name}}" class="item">
-      <div class="item-img">
-        <img src="/static/img/{{item.theme_imgsrc}}.png" alt="{{item.theme_imgsrc}}">
-      </div>
-      <div class="item-title">
-        <h4>{{item.theme_name}}</h4>
-      </div>
-    </a>
-    <div></div>
-    {% else %}
-      <p>There are no downloadable themes yet!</p>
-    {% endfor %}
-  </div>
+<div class="content">
+    <ol class="breadcrumb">
+      <li class="active"><a href="/themestore/theme/index">Theme List</a></li>
+      <li><a href="/themestore/upload/index">Upload Your Theme</a></li>
+    </ol>
+    <div class="list">
+    {% for item in themelist %}
+      <a href="/themestore/theme/detail/themename/{{item.theme_name}}" class="item">
+        <div class="item-img">
+          <img src="/static/img/{{item.theme_imgsrc}}.png" alt="{{item.theme_imgsrc}}">
+        </div>
+        <div class="item-title">
+          <h4>{{item.theme_name}}</h4>
+        </div>
+      </a>
+      <div></div>
+      {% else %}
+        <p>There are no downloadable themes yet!</p>
+      {% endfor %}
+    </div>
+</div>
 {% endblock %}
 
 {% block script %}

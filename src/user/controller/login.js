@@ -53,7 +53,7 @@ function getUserInfo(token){
 			//if(!(res = JSON.parse(body))) reject(Error(body));
 			return resolve(res);
 		});
-	})
+	});
 }
 function getAccessToken(){
 	return new Promise(function(resolve, reject) {

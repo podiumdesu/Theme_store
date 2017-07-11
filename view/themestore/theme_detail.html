@@ -1,78 +1,71 @@
 {% extends "./parent.html" %}
 {% block style %}
-<style>
-.article{background-color: #fff;border: 1px solid #f5f5f5;padding: 0 20px 10px;}
-.flex-box{display: flex;}
-.article-left{padding:0 15px;width: 60%;}
-.aside-right{width: 40%;padding-left: 20px;}
-.theme-img img{width: 100%;border: 1px solid #f5f5f5;}
-.theme-title h2,.theme-title h4{display: inline-block;padding-right: 10px;}
-.theme-title{padding: 0 15px;}
-.btn-primary{background-color: #4A6495;}
-.table-tr{display: table-row;}
-.table-td{display: table-cell;}
-.table-td:last-child{text-align: right;}
-.info-box{margin: 10px 0;border-top: 1px solid #f3f3f3;padding: 10px 0;}
-</style>
+<link rel="stylesheet" href="/static/css/page.css">
 {% endblock %}
 
 {% block content %}
-<div class="article">
-  <header class="theme-title">
-    <h2 class="theme-name">{{data.theme_name}}</h1>
-    <h4 class="theme-author"><i>by&nbsp;{{data.theme_author}}</i></h3>
-  </header>
-  <div class="flex-box">
-    <article class="article-left">
-      <div class="theme-img">
-        <img src="/static/img/{{data.theme_imgsrc}}.png" alt="{{data.theme_name}}">
-      </div>
-      <article class="theme-description">
-        <header><h4>Description:</h4></header>
-        <div class="info-box">
-          <p>{{data.theme_description}}</p>
+<div class="content">
+  <ol class="breadcrumb">
+    <li class="active"><a href="/themestore/theme/index">Theme List</a></li>
+    <li><a href="/themestore/upload/index">Upload Your Theme</a></li>
+  </ol>
+  <div class="article">
+    <header class="theme-title">
+      <h2 class="theme-name">{{data.theme_name}}</h1>
+      <h4 class="theme-author"><i>by&nbsp;{{data.theme_author}}</i></h3>
+    </header>
+    <div class="flex-box">
+      <article class="article-left">
+        <div class="theme-img">
+          <img src="/static/img/{{data.theme_imgsrc}}.png" alt="{{data.theme_name}}">
         </div>
+        <article class="theme-description">
+          <header><h4>Description:</h4></header>
+          <div class="info-box">
+            <p>{{data.theme_description}}</p>
+          </div>
+        </article>
+        <article class="theme-tags">
+          <header><h4>Tags:</h4></header>
+          <div class="info-box">
+          {% for item in data.theme_tags %}
+            <a href="javascript:void(0)" class="item">{{item}}</a>,
+          {% endfor %}
+          {% if data.theme_lastTags %}
+            <a href="javascript:void(0)" class="item">{{data.theme_lastTags}}</a>
+          {% endif %}
+          </div>
+        </article>
       </article>
-      <article class="theme-tags">
-        <header><h4>Tags:</h4></header>
-        <div class="info-box">
-        {% for item in data.theme_tags %}
-          <a href="javascript:void(0)" class="item">{{item}}</a>,
-        {% endfor %}
-        {% if data.theme_lastTags %}
-          <a href="javascript:void(0)" class="item">{{data.theme_lastTags}}</a>
-        {% endif %}
+      <aside class="aside-right">
+        <div class="btn-group">
+          <a href="javascript:void(0)" class="btn btn-default" id="preview">Preview</a>
+          <a href="/themestore/theme/download/themename/{{data.theme_filesrc}}" class="btn btn-primary" id="Download">Download</a>
         </div>
-      </article>
-    </article>
-    <aside class="aside-right">
-      <div class="btn-group">
-        <a href="javascript:void(0)" class="btn btn-default" id="preview">Preview</a>
-        <a href="/themestore/theme/download/themename/{{data.theme_filesrc}}" class="btn btn-primary" id="Download">Download</a>
-      </div>
-      <div class="info-box">
-        <p class="theme-lastUpdated table-tr">
-          <span class="table-td">Last updated:</span>
-          <span class="table-td">{{data.theme_lastupdated}}</span>
-        </p>
-        <p class="theme-downloadtimes table-tr">
-          <span class="table-td">Download times:</span>
-          <span class="table-td">{{data.theme_downloadtimes}}</span>
-        </p>
-        <p class="theme-version table-tr">
-          <span class="table-td">Version:</span>
-          <span class="table-td">{{data.theme_version}}</span>
-        </p>
-      </div>
-      <article class="marking">
-        <header><h4>Marking:</h4></header>
         <div class="info-box">
-          <p class="theme-marking">
-            {{data.theme_marking}}
+          <p class="theme-lastUpdated table-tr">
+            <span class="table-td">Last updated:</span>
+            <span class="table-td">{{data.theme_lastupdated}}</span>
+          </p>
+          <p class="theme-downloadtimes table-tr">
+            <span class="table-td">Download times:</span>
+            <span class="table-td">{{data.theme_downloadtimes}}</span>
+          </p>
+          <p class="theme-version table-tr">
+            <span class="table-td">Version:</span>
+            <span class="table-td">{{data.theme_version}}</span>
           </p>
         </div>
-      </article>
-    </aside>
+        <article class="marking">
+          <header><h4>Marking:</h4></header>
+          <div class="info-box">
+            <p class="theme-marking">
+              {{data.theme_marking}}
+            </p>
+          </div>
+        </article>
+      </aside>
+    </div>
   </div>
 </div>
 {% endblock %}

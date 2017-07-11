@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Theme Store-Firekylin</title>
+<title>{% block title %}{% endblock %}</title>
 <meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
 <link href="//lib.baomitu.com/normalize/5.0.0/normalize.min.css" rel="stylesheet">
 <link href="//lib.baomitu.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -49,6 +49,7 @@
             </a>
             <i class="arrow arrow-top"></i>
             <ul class="droplist">
+              <li><a href="/user/personal/index">个人中心</a></li>
               <li><a id="logout">注销</a></li>
             </ul>
           </li>
@@ -59,16 +60,11 @@
       </div>
     </div>
   </nav>
-  <div class="content">
-    <ol class="breadcrumb">
-      <li class="active"><a href="/themestore/theme/index">Theme List</a></li>
-      <li><a href="/themestore/upload">Upload Your Theme</a></li>
-    </ol>
-    {% block content %}{% endblock %}
-  </div>
+  {% block content %}{% endblock %}
   <script src="//lib.baomitu.com/jquery/3.1.1/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   {% block script %}{% endblock %}
   <script src="/static/js/base.js"></script>
+  <script src="/static/js/user.js"></script>
 </body>
 </html>

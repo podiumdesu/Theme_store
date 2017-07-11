@@ -45,4 +45,5 @@ export default class extends Base {
     let file = think.RESOURCE_PATH + '/static/theme/'+themename;
     this.download(file);
   }
+
 }

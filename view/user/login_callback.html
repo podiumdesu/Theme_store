@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>New ThinkJS Application</title>
+<title>login</title>
 <style>
 *{padding: 0;margin: 0;font-size: 16px;line-height: 20px;font-family: arial;}
 a, a:visited{color:#337ab7;text-decoration: none; cursor: pointer;}
@@ -23,16 +23,19 @@ code{  padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;
   <header>
     <div class="wrap">
     {% if userInfo.login%}
-      <h1>登陆成功，请跳转回主页！</h1>
+      <h1>Login successfully!</h1>
     {% else %}
-      <h1>登录失败，请重试！</h1>
+      <h1>Login failed,please try again!</h1>
     {% endif %}
     </div>
   </header>
   <div class="content">
     <h2>
-      <a href="/home/index/index">返回主页</a>
+      <a href="/home/index/index">Jump back to home page</a> after 3 seconds
     </h2>
   </div>
+  <script>
+    setTimeout("window.location.pathname = '/home/index/index'", 3000);
+  </script>
 </body>
 </html>
