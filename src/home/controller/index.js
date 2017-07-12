@@ -3,7 +3,6 @@
 import Base from './base.js';
 import path from 'path';
 import fs from 'fs';
-import qs from 'qs';
 
 const readFileAsync = think.promisify(fs.readFile, fs);
 
