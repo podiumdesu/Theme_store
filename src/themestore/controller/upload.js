@@ -34,9 +34,14 @@ export default class extends Base {
 
     let fileArr =  ['screenshot.png','package.json','index.html','post.html','page.html','tag.html','search.html','archive.html'];
     let fileObj = await getFileObj(filepath);
-    // let originalFilename = themefile.originalFilename;
-    // let end = originalFilename.length - 4;
-    // let themeName = originalFilename.slice(0,end).toLowerCase();
+    let originalFilename = themefile.originalFilename;
+    let end = originalFilename.length - 4;
+    let themeName = originalFilename.slice(0,end);
+    //我觉得不应该用themeName，要不然在上传文件处说明:请将您的主题文件放在一个以您主题名命名文件夹内，并压缩成*.zip格式上传
+    //或者在页面里再单独添加一个字段，主题名，单独验证
+    //验证是否存在同名主题
+    let theme = await themeList.where({theme_name:themeName}).find();
+    if(theme) this.fail(1000,'已存在同名主题！')
 
     let aa = true;
     fileArr.forEach((item,index,arr)=>{
@@ -46,9 +51,15 @@ export default class extends Base {
     else {
       //添加数据
       let jsonFile = fileObj[themeName+'/package.json'];
-      let jsonContent = await getFileContent(jsonFile,'string');
+      let jsonContent = await getFileContent(jsonFile,'string');//读json文件
       let jsonObj = JSON.parse(jsonContent);
       let name =jsonObj.name;
+
+      
+      //读取图片信息，图片另存
+      let imgFile = fileObj[themeName+'/screenshot.png'];
+      let imgContent = await getFileContent(imgFile,'nodebuffer');
+      fs.writeFileSync(think.RESOURCE_PATH + '/static/img/'+name+'.png', imgContent);
       let myDate = new Date();
       let insertId = await themeList.add({theme_uid:uid.newGUID(),theme_authoruid:currentUser.user_uid,
         theme_version:jsonObj.version,theme_filesrc:name+'.zip',theme_name:name,theme_imgsrc:name,theme_marking:0.0,theme_tags:jsonObj.tags,
@@ -56,7 +67,7 @@ export default class extends Base {
 
       //let basename = themefile.originalFilename;//因为本系统不允许上传同名主题，所以文件名就直接使用主题名
       //将上传的文件（路径为filepath的文件）移动到第二个参数所在的路径，并改为第二个参数的文件名。
-      fs.renameSync(filepath, uploadpath + '/' + name);
+      fs.renameSync(filepath, uploadpath + '/' + name+'.zip');
       themefile.path = uploadpath + '/' + name;
     // //img buffer对象形式
     // let jsonBuffer = fileObj[themeName+'/firekylin.png']._data.compressedContent;

@@ -20,5 +20,5 @@
   .wrap{width: 1000px;margin: auto}
   .breadcrumb {padding: 15px 0;margin-bottom: 0px;}
   .breadcrumb>.active a{color: #777;}
-  #logout{color: #337ab7;text-decoration: underline;}
+  .navbar-nav .a-default{color: #337ab7;text-decoration: underline;}
   .btn-primary{background-color: #4A6495;}
