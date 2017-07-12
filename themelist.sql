@@ -7,9 +7,9 @@ CREATE TABLE `ts_list` (
   `theme_filesrc` varchar(255) NOT NULL,
   `theme_name` varchar(255) NOT NULL,
   `theme_imgsrc` varchar(255) NOT NULL,
-  `theme_marking` float(2,1) DEFAULT NULL,
-  `theme_tags` varchar(1000) DEFAULT NULL,
-  `theme_description` varchar(1000) NOT NULL,
+  `theme_marking` float(2,1) NOT NULL,
+  `theme_tags` varchar(1000) DEFAULT '',
+  `theme_description` varchar(1000) DEFAULT '',
   `theme_downloadtimes` smallint(10) NOT NULL,
   `theme_lastupdated` date NOT NULL
 );

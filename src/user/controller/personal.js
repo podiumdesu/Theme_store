@@ -15,9 +15,8 @@ export default class extends Base {
   //   this.end('<a href="'+github.getAuthorizeUrl()+'">Login with Github</a>');
 // }
   async indexAction(){
-  	
-	return this.display();
-	
+	   
+    return this.display();
   }
 
 }

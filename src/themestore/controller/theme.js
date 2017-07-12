@@ -16,8 +16,8 @@ export default class extends Base {
     this.assign({themelist: themelist});
 
     //读用户缓存
-    let userInfo = await this.session('userInfo');
-    this.assign({userInfo:userInfo});
+    // let userInfo = await this.session('userInfo');
+    // this.assign({userInfo:userInfo});
 
     return this.display();
   }
@@ -35,8 +35,8 @@ export default class extends Base {
     this.assign({data: data});
 
     //读用户缓存
-    let userInfo = await this.session('userInfo');
-    this.assign({userInfo:userInfo});
+    // let userInfo = await this.session('userInfo');
+    // this.assign({userInfo:userInfo});
     
     return this.display();
   }
