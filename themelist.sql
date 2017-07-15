@@ -1,4 +1,4 @@
-USE theme;
+USE firekylin.org;
 DROP TABLES ts_list;
 CREATE TABLE `ts_list` (
   `theme_uid` varchar(36) NOT NULL PRIMARY KEY,
