@@ -48,10 +48,14 @@
         <li><a href="https://github.com/firekylin/firekylin/issues/34">Users</a></li>
         <li><a href="https://github.com/firekylin/firekylin/blob/master/CHANGELOG.md">Change Log</a></li>
         <li><a href="https://github.com/firekylin/firekylin/wiki">Documentation</a></li>
-        {% if userInfo.login%}
+        {% if userInfo.user_loginname %}
           <li class="userinfo">
             <a href="javascript:void(0)" class="username">
-              <i>{{userInfo.login}}</i>
+              {% if userInfo.user_name %}
+              <i>{{userInfo.user_name}}</i>
+              {% else %}
+              <i>{{userInfo.user_loginname}}</i>
+              {% endif %}
               <i class="arrow arrow-bottom"></i>
             </a>
             <i class="arrow arrow-top"></i>

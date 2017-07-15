@@ -18,11 +18,10 @@ INSERT ts_list VALUES('66dc0a64-5687-c76e-167b-432a5889b1ab','1206f84c-6603-11e7
 
 DROP TABLES ts_user;
 CREATE TABLE `ts_user` (
-  `user_uid` varchar(36) NOT NULL PRIMARY KEY,
+	`user_uid` varchar(36) NOT NULL PRIMARY KEY,
     `user_loginname` varchar(255) NOT NULL,
     `user_name` varchar(255) DEFAULT NULL,
     `user_mailbox` varchar(255) DEFAULT NULL,
     `user_tellphone` varchar(11) DEFAULT NULL,
     `user_city` varchar(100) DEFAULT NULL
 );
-INSERT ts_user VALUES('1206f84c-6603-11e7-b171-3c9509546df4','Kate605690919','北风慕蝶','605690919@qq.com','15271918234','河南');

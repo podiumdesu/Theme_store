@@ -1,35 +1,39 @@
 {% extends "../themestore/parent.html" %}
 {% block title %}{{userInfo.login}}'s Personal Center{% endblock %}
 {% block style %}
-<link rel="stylesheet" href="/static/css/page.css">
+<style>
+.content{padding-top:5px;}
+article{padding:10px 20px 30px;background-color: #fff;box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);border-radius: 3px;}
+header{color:#777;}
+</style>
 {% endblock %}
 
 {% block content %}
 <div class="content">
+  <h3>Personal Center</h3>
   <article>
     <header>
-      <h3>Personal Center</h3>
       <p>Please complete your infromation</p>
     </header>
     <section>
     <form>
       <div class="form-group">
         <label for="inputNickname">Nickname</label>
-        <input type="text" class="form-control" id="inputNickname" value=>
+        <input type="text" class="form-control" id="inputNickname" name="inputNickname" value={{userInfo.user_name}}>
       </div>
       <div class="form-group">
         <label for="inputEmail">Email</label>
-        <input type="Email" class="form-control" id="inputEmail" value=>
+        <input type="Email" class="form-control" id="inputEmail" name="inputEmail" value={{userInfo.user_mailbox}}>
       </div>
       <div class="form-group">
         <label for="inputTell">Tellphone</label>
-        <input type="number" class="form-control" id="inputTell" value=>
+        <input type="number" class="form-control" id="inputTell" name="inputTell" value={{userInfo.user_tellphone}}>
       </div>
       <div class="form-group">
         <label for="inputCity">所在城市</label>
-        <input type="text" class="form-control" id="inputCity" value="">
+        <input type="text" class="form-control" id="inputCity" name="inputCity" value={{userInfo.user_city}}>
       </div>
-      <button type="submit" class="btn btn-default">Update Your Information</button>
+      <button type="submit" class="btn btn-primary">Update Your Information</button>
     </form>
     </section>
   </article>

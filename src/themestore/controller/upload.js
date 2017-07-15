@@ -97,6 +97,7 @@ function getFileContent(zipObject,type){
     });
   });
 }
+//生成UID
 function GUID() {
  this.date = new Date();
  /* 判断是否初始化过，如果初始化过以下代码，则以下代码将不再执行，实际中只执行一次 */
