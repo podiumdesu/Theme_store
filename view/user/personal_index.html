@@ -1,5 +1,11 @@
 {% extends "../themestore/parent.html" %}
-{% block title %}{{userInfo.login}}'s Personal Center{% endblock %}
+{% block title %}
+  {% if userInfo.user_name %}
+    {{userInfo.user_name}}
+  {% else %}
+    {{userInfo.user_loginname}}
+  {% endif %}'s Personal Center
+{% endblock %}
 {% block style %}
 <style>
 .content{padding-top:5px;}

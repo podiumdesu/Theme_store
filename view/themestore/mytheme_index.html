@@ -21,31 +21,29 @@
 {% block content %}
 <div class="content">
     <ol class="breadcrumb">
-      <li class="active"><a href="/themestore/theme/index">Theme List</a></li>
+      <li><a href="/themestore/theme/index">Theme List</a></li>
       <li><a href="/themestore/upload/index">Upload Your Theme</a></li>
-      <li><a href="/themestore/mytheme/index">My Theme</a></li>
+      <li class="active"><a href="/themestore/mytheme/index">My Theme</a></li>
     </ol>
     <div class="list">
     {% for item in themelist %}
-      <div class="item">
-        <a href="/themestore/theme/detail/themename/{{item.theme_name}}/state/theme">
-        <div class="item-img">
-          <img src="/static/img/{{item.theme_imgsrc}}.png" alt="{{item.theme_imgsrc}}">
-        </div>
-        <div class="item-title">
-          <h4>{{item.theme_name}}</h4>
-        </div>
-        </a>
-        <div class="white-btngroup">
-          <a href="/themestore/theme/detail/themename/{{item.theme_name}}/state/theme" class="white-btn">Detail</a>
-          {% if item.theme_authoruid == userInfo.user_uid %}
+    <div class="item">
+		<a href="/themestore/theme/detail/themename/{{item.theme_name}}/state/mytheme">
+		<div class="item-img">
+		  <img src="/static/img/{{item.theme_imgsrc}}.png" alt="{{item.theme_imgsrc}}">
+		</div>
+		<div class="item-title">
+		  <h4>{{item.theme_name}}</h4>
+		</div>
+		</a>
+		<div class="white-btngroup">
+		  <a href="/themestore/theme/detail/themename/{{item.theme_name}}/state/mytheme" class="white-btn">Detail</a>
           <a href="javascript:void(0)" class="white-btn delete-theme" data-filesrc="{{item.theme_filesrc}}">Delete</a>
-          {% endif %}
-        </div>
-      </div>
-      {% else %}
-        <p>There are no downloadable themes yet!</p>
-      {% endfor %}
+		</div>
+    </div>
+	{% else %}
+	<p>You haven't uploaded any theme yet!</p>
+	{% endfor %}
     </div>
 </div>
 {% endblock %}

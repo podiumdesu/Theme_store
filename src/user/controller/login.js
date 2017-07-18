@@ -6,9 +6,9 @@ import qs from 'qs';
 let oauth = {
   client_id:'efaf9351830c99050b36',
   client_secret:'de4650427964ecce1b35cd41ccbed8907b7e5fd4',
-  redirect_uri:'http://43.240.28.48:8787/user/login/callback'
+  redirect_uri:'http://127.0.0.1:8360/user/login/callback'
 };
-let url = 'https://github.com/login/oauth/access_token';
+let url = 'http://43.240.28.48:8787/user/login/callback';
 //var request = require("request");
 
 let uid = new GUID();
@@ -26,7 +26,7 @@ export default class extends Base {
     oauth.state = this.get('state');
 
     let token = await getAccessToken();
-    let userInfo = await getUserInfo(token);
+    let userInfo = await getUserInfo(token);//这个userInfo是github返回的用户信息，不是缓存中读到的那个userInfo，自己起的名字别搞混了。。。
 
     if (userInfo.login) {
     	//将用户信息存入数据库(如果数据库没有的话再添加（thenAdd）)

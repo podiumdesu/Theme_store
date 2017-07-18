@@ -4,18 +4,19 @@
   .navbar-collapse a:hover{color:#000;}
   .navbar-fixed-top{background-color: #4A6495;height: 51px;}
   .navbar-toggle .icon-bar{background: #fff;}
+  .navbar-collapse{background-color: #4a6495;overflow-x: hidden;}
   .navbar-nav>li>a:hover, .navbar-nav>li>a:focus, .navbar-nav>li>a.active {background-color: #FFF;border-radius: 50px;color: #000;}
   .navbar-nav>li[disabled]>a:hover, .navbar-nav>li[disabled]>a:focus, .navbar-nav>li[disabled]>a:active {background-color: transparent;}
   a.navbar-brand,a.navbar-brand:hover,a.navbar-brand:focus{color: #fff;}
-  @media screen and (min-width: 768px){
+  @media screen and (min-width: 900px){
   .navbar-nav>li {padding-top: 5px;padding-bottom: 5px;}
   }
-  @media screen and (min-width: 768px){
+  @media screen and (min-width: 900px){
   .navbar-nav>li>a {padding: 10px;}
   }
   h1{font-family: 'Montserrat Alternates', sans-serif;font-size: 36px;font-weight: normal}
   code{padding: 2px 4px;font-size: 90%;color: #c7254e;background-color: #f9f2f4;border-radius: 4px;}
-  .navbar-fixed-top .container{margin:0 15px;}
+  .navbar-fixed-top .container{margin:0;}
   .content{margin: 53px auto;max-width: 1000px;padding: 0 30px;}
   .wrap{width: 1000px;margin: auto}
   .breadcrumb {padding: 15px 0;margin-bottom: 0px;}

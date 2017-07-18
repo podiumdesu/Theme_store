@@ -12,13 +12,14 @@ article{padding:10px 20px 30px;background-color: #fff;box-shadow: 1px 1px 6px rg
 	<ol class="breadcrumb">
 	  <li><a href="/themestore/theme/index">Theme List</a></li>
 	  <li class="active"><a href="/themestore/upload/index">Upload Your Theme</a></li>
+	  <li><a href="/themestore/mytheme/index">My Theme</a></li>
 	</ol>
 	<article>
 		<header>
 			<h3>Submit Your Theme to the Theme Store(*.zip) {{filepath}}</h3>
 		</header>
 		<section>
-		{% if userInfo.login%}
+		{% if userInfo.user_loginname%}
 		<form id="fileUpload" action="" enctype="multipart/form-data" method="post">
 			<div class="fileinput fileinput-new input-group" data-provides="fileinput">
 			  <div class="form-control" data-trigger="fileinput">
@@ -38,7 +39,7 @@ article{padding:10px 20px 30px;background-color: #fff;box-shadow: 1px 1px 6px rg
 	    <p>Before you can upload a new theme, <a href="https://github.com/login/oauth/authorize?client_id=f1aef8c948075819915c&scope=user,public_repo">please log in</a>.</p>
 	    {% endif %}
 			<h3>Tips:</h3>
-			<p>The Theme you have uploaded should refer to a certain format.You can read this document to learn more.<a href="https://github.com/firekylin/firekylin/wiki/%E4%B8%BB%E9%A2%98%E5%BC%80%E5%8F%91">help document</a></p>
+			<p>The theme you have uploaded should refer to a certain format.You can read this document to learn more.<a href="https://github.com/firekylin/firekylin/wiki/%E4%B8%BB%E9%A2%98%E5%BC%80%E5%8F%91">help document</a></p>
 		</section>
 	</article>
 </div>

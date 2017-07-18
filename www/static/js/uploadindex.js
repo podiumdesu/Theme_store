@@ -2,7 +2,7 @@ $(function(){
     //文件上传
     $('#fileUpload').submit(function (e) {
         e.preventDefault();
-        var data = new FormData($(this)[0]);
+        let data = new FormData($(this)[0]);
     	$.ajax({
             url: '/themestore/upload/theme',
             type: 'POST',
@@ -12,7 +12,10 @@ $(function(){
             contentType: false,  
             processData: false,
             success:function (res) {
-        		if(!res.errno) alert('上传成功！');
+        		if(!res.errno){
+                    if(res.data === "update") alert('This theme you have uploaded has been updated successfully!');
+                    else if(res.data === "upload") alert('Upload successfully!');
+                } 
         		else alert(res.errmsg);
         	}
     	});
