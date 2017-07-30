@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "babel-runtime": "6.x.x",
+    "material-ui": "^1.0.0-beta.2",
     "nunjucks": "^2.2.0",
     "thinkjs": "2.1.x"
   },

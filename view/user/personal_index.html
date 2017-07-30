@@ -9,18 +9,18 @@
 {% block style %}
 <style>
 .content{padding-top:5px;}
-article{padding:10px 20px 30px;background-color: #fff;box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);border-radius: 3px;}
+article{padding:10px 20px 30px;}
 header{color:#777;}
+input.form-control{border: none;box-shadow: none;border-bottom: 1px solid #ccc;border-radius: 0;background-color: transparent;}
+input.form-control:focus{box-shadow: none;border-color: rgb(0, 188, 212);}
+.form-group label{width: 20%;margin-right: 10px;text-align: right;}
+.form-group input{width: 75%;display: inline-block;}
 </style>
 {% endblock %}
-
+{% block CurrentDescription %}Please complete your infromation{% endblock %}
 {% block content %}
 <div class="content">
-  <h3>Personal Center</h3>
   <article>
-    <header>
-      <p>Please complete your infromation</p>
-    </header>
     <section>
     <form>
       <div class="form-group">
@@ -39,7 +39,10 @@ header{color:#777;}
         <label for="inputCity">所在城市</label>
         <input type="text" class="form-control" id="inputCity" name="inputCity" value={{userInfo.user_city}}>
       </div>
-      <button type="submit" class="btn btn-primary">Update Your Information</button>
+      <div class="form-group">
+        <label for=""></label>
+        <button type="submit" class="btn btn-primary">Update Your Information</button>
+      </div>
     </form>
     </section>
   </article>

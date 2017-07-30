@@ -65,7 +65,7 @@
             </ul>
           </li>
         {% else %}
-          <li><a href="https://github.com/login/oauth/authorize?client_id=efaf9351830c99050b36&scope=user,public_repo" target="view_window">Log in</a></li>
+          <li><a href="https://github.com/login/oauth/authorize?client_id={{clientId}}&scope=user,public_repo&state={{state}}">Log in</a></li>
         {% endif %}
       </ul>
     </div><!-- /.navbar-collapse -->

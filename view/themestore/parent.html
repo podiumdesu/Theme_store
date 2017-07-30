@@ -6,12 +6,14 @@
 <meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
 <link href="//lib.baomitu.com/normalize/5.0.0/normalize.min.css" rel="stylesheet">
 <link href="//lib.baomitu.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+<link rel="stylesheet" href="/static/css/font-awesome.min.css">
 <link rel="stylesheet" href="/static/css/layout.css">
 <link rel="stylesheet" href="/static/css/homeindex.css">
 {% block style %}{% endblock %}
 </head>
 <body>
-  <nav class="navbar navbar-fixed-top">
+  <header class="navbar navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main" aria-expanded="false">
@@ -32,28 +34,75 @@
           </li>
           {% endif %}
           <li><a href="https://75team.com">Demo</a></li>
-          <li><a href="/themestore/theme/index">Theme Store</a></li>
+          <li class="dropmenu">
+            <a href="javascript:void(0)" class="themestore active">Theme Store</a>
+            <ul>
+              <li><a href="/themestore/theme/index">Theme List</a></li>
+              <li><a href="/themestore/upload/index">Upload Your Theme</a></li>
+              <li><a href="/themestore/mytheme/index">My Theme</a></li>
+            </ul>
+          </li>
           <li><a href="https://github.com/firekylin/firekylin/issues/34">Users</a></li>
           <li><a href="https://github.com/firekylin/firekylin/blob/master/CHANGELOG.md">Change Log</a></li>
           <li><a href="https://github.com/firekylin/firekylin/wiki">Documentation</a></li>
           {% if userInfo.user_loginname%}
-          <li class="userinfo">
-            <a href="javascript:void(0)" class="username">
+          <li class="dropmenu usercenter">
+            <a href="javascript:void(0)" class="themestore active">
               {% if userInfo.user_name %}
               <i>{{userInfo.user_name}}</i>
               {% else %}
               <i>{{userInfo.user_loginname}}</i>
               {% endif %}
-              <i class="arrow arrow-bottom"></i>
             </a>
-            <i class="arrow arrow-top"></i>
-            <ul class="droplist">
-              <li><a href="/user/personal/index" class="a-default">个人中心</a></li>
-              <li><a id="logout" class="a-default">注销</a></li>
+            <ul>
+              <li><a href="/user/personal/index">个人中心</a></li>
+              <li><a id="logout">注销</a></li>
             </ul>
           </li>
         {% else %}
-          <li><a href="https://github.com/login/oauth/authorize?client_id=efaf9351830c99050b36&scope=user,public_repo" target="view_window">Log in</a></li>
+          <li><a href="https://github.com/login/oauth/authorize?client_id={{clientId}}&scope=user,public_repo&state={{state}}">Log in</a></li>
+        {% endif %}
+        </ul>
+      </div>
+    </div>
+    <div class="container content">
+        <h1 class="animated bounce">{{CurrentPageName}}</h1>
+        <p>{% block CurrentDescription %}{% endblock %}</p>
+    </div>
+  </header>
+  <nav class="navbar navbar-fixed-top small-nav">    
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main-small" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" id="backTop" href="javascript:void(0)">{{CurrentPageName}}</a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-main-small">
+        <ul class="nav navbar-nav navbar-right">
+
+          {% block customNav %}
+          {% endblock %}
+
+          {% if userInfo.user_loginname%}
+          <li class="dropmenu usercenter">
+            <a href="javascript:void(0)" class="themestore active">
+              {% if userInfo.user_name %}
+              <i>{{userInfo.user_name}}</i>
+              {% else %}
+              <i>{{userInfo.user_loginname}}</i>
+              {% endif %}
+            </a>
+            <ul>
+              <li><a href="/user/personal/index">个人中心</a></li>
+              <li><a id="logout">注销</a></li>
+            </ul>
+          </li>
+        {% else %}
+          <li><a href="https://github.com/login/oauth/authorize?client_id={{clientId}}&scope=user,public_repo" target="view_window">Log in</a></li>
         {% endif %}
         </ul>
       </div>
@@ -62,8 +111,8 @@
   {% block content %}{% endblock %}
   <script src="//lib.baomitu.com/jquery/3.1.1/jquery.min.js"></script>
   <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  {% block script %}{% endblock %}
-  <script src="/static/js/base.js"></script>
   <script src="/static/js/user.js"></script>
+  <script src="/static/js/base.js"></script>
+  {% block script %}{% endblock %}
 </body>
 </html>

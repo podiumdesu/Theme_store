@@ -7,10 +7,12 @@ export default class extends think.controller.base {
    async __before(){
    	this._userInfo = await this.session('userInfo');
       this._listModel = this.model('list');
-   	if(think.isEmpty(this._userInfo)){
-   		return this.redirect('/user/login/index')
-   	}
-   	this.assign('userInfo',this._userInfo);
+      this._clientId = 'efaf9351830c99050b36';
+      this.assign({clientId:this._clientId,state:this.http.url});
+       if(think.isEmpty(this._userInfo)){
+         return this.fail();
+       }
+      this.assign('userInfo',this._userInfo);
    }
 
 }

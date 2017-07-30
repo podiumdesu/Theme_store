@@ -2,10 +2,12 @@
 {% block style %}
 <style>
 .theme-title a{display: inline-block;float:right;margin:20px 0 10px;font-size: 20px;line-height: 30px;}
-.article{background-color: #fff;border: 1px solid #f5f5f5;padding: 0 20px 10px;}
+.article{border: 1px solid #f5f5f5;}
 .flex-box{display: flex;}
-.article-left{padding:0 15px;width: 60%;}
+.article-left{width: 60%;margin-right: 20px;}
 .aside-right{width: 40%;padding-left: 20px;}
+i.fa.fa-star {color: #FFD600;}
+.marking i.fa{margin-right:5px;}
 .theme-img img{width: 100%;border: 1px solid #f5f5f5;}
 .theme-title h2,.theme-title h4{display: inline-block;padding-right: 10px;}
 .theme-title{padding: 0 15px;}
@@ -13,49 +15,34 @@
 .table-td{display: table-cell;}
 .table-td:last-child{text-align: right;}
 .info-box{margin: 10px 0;border-top: 1px solid #f3f3f3;padding: 10px 0;}
+.p-indent{text-indent: 2em;}
 </style>
 {% endblock %}
-
+{% block CurrentDescription %}by {{data.theme_authorname}}{% endblock %}
 {% block content %}
+<input type="hidden" id="themename" value="{{data.theme_name}}">
 <div class="content">
-  <ol class="breadcrumb">
-    <li><a href="/themestore/theme/index">Theme List</a></li>
-    <li><a href="/themestore/upload/index">Upload Your Theme</a></li>
-    <li><a href="/themestore/mytheme/index">My Theme</a></li>
-  </ol>
   <div class="article">
-    <header class="theme-title">
-      <h2 class="theme-name">{{data.theme_name}}</h1>
-      <h4 class="theme-author"><i>by&nbsp;{{data.theme_authorname}}</i></h4>
-      <a href="/themestore/{{state}}/index"> &lt--back</a>
-    </header>
     <div class="flex-box">
       <article class="article-left">
         <div class="theme-img">
           <img src="/static/img/{{data.theme_imgsrc}}.png" alt="{{data.theme_name}}">
         </div>
         <article class="theme-description">
+          {% if data.descriptionExist %}
           <header><h4>Description:</h4></header>
           <div class="info-box">
-            <p>{{data.theme_description}}</p>
-          </div>
-        </article>
-        <article class="theme-tags">
-          <header><h4>Tags:</h4></header>
-          <div class="info-box">
-          {% for item in data.theme_tags %}
-            <a href="javascript:void(0)" class="item">{{item}}</a>,
-          {% endfor %}
-          {% if data.theme_lastTags %}
-            <a href="javascript:void(0)" class="item">{{data.theme_lastTags}}</a>
+            <p class="p-indent">{{data.theme_description}}</p> 
+          </div>       
+          {% else %}          
+          <header><h4 class="inlineBlock">Description:</h4><span>None</span></header>
           {% endif %}
-          </div>
         </article>
       </article>
       <aside class="aside-right">
         <div class="btn-group">
           <a href="javascript:void(0)" class="btn btn-default" id="preview">Preview</a>
-          <a href="/themestore/mytheme/download/themename/{{data.theme_filesrc}}/times/{{data.theme_downloadtimes}}" class="btn btn-primary" id="Download">Download</a>
+          <a href="/themestore/theme/download/themename/{{data.theme_filesrc}}/times/{{data.theme_downloadtimes}}" class="btn btn-primary">Download</a>
         </div>
         <div class="info-box">
           <p class="theme-lastUpdated table-tr">
@@ -64,21 +51,46 @@
           </p>
           <p class="theme-downloadtimes table-tr">
             <span class="table-td">Download times:</span>
-            <span class="table-td">{{data.theme_downloadtimes}}</span>
+            <span class="table-td" id="downloadtimes">{{data.theme_downloadtimes}}</span>
           </p>
           <p class="theme-version table-tr">
             <span class="table-td">Version:</span>
             <span class="table-td">{{data.theme_version}}</span>
           </p>
         </div>
-<!--         <article class="marking">
-          <header><h4>Marking:</h4></header>
+        <article class="marking">
+          <header>
+            <h4 class="inlineBlock">Marking:</h4>
+            <div class="inlineBlock" id="star"></div>
+          </header>
           <div class="info-box">
-            <p class="theme-marking">
-              {{data.theme_marking}}
+            <p class="theme-marking inlineBlock" style="padding-right: 5px;">
+              <span>score:</span><span id="marking">{{data.theme_marking}}</span>
+            </p>
+            <p class="theme-marking inlineBlock">
+              <span>Number of raters:</span><span id="num">{{data.theme_markingnum}}</span>
             </p>
           </div>
-        </article> -->
+        </article>
+        <article class="theme-tags">
+          {% if data.tagsExist %}
+          <header><h4>Tags:</h4></header>
+          <div class="info-box">
+          {% if data.tagsExist %}
+            {% for item in data.theme_tags %}
+              <a href="/themestore/theme/index/search/{{item}}/searchType/tags" class="item">{{item}}</a>,
+            {% endfor %}
+            {% if data.theme_lastTags %}
+              <a href="/themestore/theme/index/search/{{data.theme_lastTags}}/searchType/tags" class="item">{{data.theme_lastTags}}</a>
+            {% endif %}          
+          {% else %}
+            <p class="p-indent">None</p>
+          {% endif %}
+          </div>      
+          {% else %}          
+          <header><h4 class="inlineBlock">Tags:</h4><span>None</span></header></header>
+          {% endif %}
+        </article>
       </aside>
     </div>
   </div>
@@ -86,5 +98,37 @@
 {% endblock %}
 
 {% block script %}
-  <!-- <script src="/static/js/themedetail.js"></script> -->
+<script type="text/javascript">
+let themename = document.getElementById('themename'),
+    marking = document.getElementById('marking'),
+    num = document.getElementById('num');
+let sr = new StarRank({
+  container:'#star',
+  rank:marking.innerText,
+  rankCustom(index){
+    let str = $.param({rank:index,themename:themename.value});
+    let rank;
+    $.ajax({
+        url:'/themestore/mytheme/rank',
+        type:'POST',
+        dataType:'JSON',
+        data:str,
+        async:false,
+        success:function(res){
+          if(!res.errno) {
+            rank = Math.round(res.data.rank);
+            marking.innerText = res.data.rank;
+            num.innerText = res.data.markingnum;
+          }
+          else{
+            alert('Please log in before rating!');
+            rank = 'orRank';
+          }
+        }
+      });
+    return rank;
+  }
+});
+</script>
+  <script src="/static/js/themedetail.js"></script>
 {% endblock %}

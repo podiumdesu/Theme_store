@@ -1,15 +1,14 @@
 'use strict';
 
-import Base from './base.js';
+import Base from '../../themestore/controller/base.js';
 import request from 'request';
 import qs from 'qs';
 let oauth = {
   client_id:'efaf9351830c99050b36',
   client_secret:'de4650427964ecce1b35cd41ccbed8907b7e5fd4',
-  redirect_uri:'http://127.0.0.1:8360/user/login/callback'
+  redirect_uri:'http://43.240.28.48:8787/user/login/callback'
 };
-let url = 'http://43.240.28.48:8787/user/login/callback';
-//var request = require("request");
+let url = 'https://github.com/login/oauth/access_token';
 
 let uid = new GUID();
 export default class extends Base {
@@ -18,8 +17,9 @@ export default class extends Base {
    * @return {Promise} []
    */
   async indexAction(){
-	return this.display();
+	  return this.display();
   }
+
   async callbackAction(){
     //auto render template file index_index.html
     oauth.code = this.get('code');
@@ -39,7 +39,7 @@ export default class extends Base {
   		//let insertUid = await userList.thenAdd({user_uid: uid.newGUID(),user_loginname: userInfo.login},{user_loginname:userInfo.login});
     	//设置session（从数据库中读取已有信息放到session中）
 	    await this.session('userInfo',user);
-    	return this.redirect('/home/index/index')
+    	return this.redirect(oauth.state);
     }
     else {
       return this.redirect('/user/login/failed');

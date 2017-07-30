@@ -1,6 +1,6 @@
 'use strict';
 
-import Base from '../../themestore/controller/base.js';
+import Base from '../../themestore/controller/loginbase.js';
 
 export default class extends Base {
   /**
@@ -8,6 +8,7 @@ export default class extends Base {
    * @return {Promise} []
    */
   async indexAction(){
+    this.assign({CurrentPageName:'Personal Center'});
     return this.display();
   }
   async updateAction(){

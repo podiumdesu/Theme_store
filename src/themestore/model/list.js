@@ -3,6 +3,17 @@
  * model
  */
 export default class extends think.model.base {
+  //根据themename获取单条数据（详情页用）
+  async getData(themename){
+    let data = await this.where({theme_name: themename}).find();
+    let d = new Date(data.theme_lastupdated);  
+    data.tagsExist = !!data.theme_tags;  
+    data.descriptionExist = !!data.theme_description;
+    data.theme_lastupdated = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); 
+    data.theme_tags = data.theme_tags.split(',');
+    data.theme_lastTags = data.theme_tags.pop();//方便页面上显示时，用逗号隔开，且不显示最后一个的逗号
+    return data;
+  }
 	/* 生成GUID码 */
     newGUID() {
       let date = new Date();

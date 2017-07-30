@@ -16,14 +16,20 @@ export default class extends Base {
     let version = false;
     let themeModel = this.model('theme');
     version = await readFileAsync(release).catch(() => false);
-    this.assign({latest: version});
+    this.assign({latest: version,state:this.http.url});
 
 
     //auto render template file index_index.html
 
     //读用户缓存
     let userInfo = await this.session('userInfo');
+    this._clientId = 'f1aef8c948075819915c';
     this.assign({userInfo:userInfo});
+    this.assign('clientId',this._clientId);
+    return this.display();
+  }
+
+  async testAction(){
     return this.display();
   }
 }
