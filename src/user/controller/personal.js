@@ -19,6 +19,7 @@ export default class extends Base {
     //更新缓存
     let user = await userList.where({user_loginname: userInfo.user_loginname}).find();
     await this.session('userInfo',user);
+    let user = await this.session('userInfo');
     this.success();
   }
 }
