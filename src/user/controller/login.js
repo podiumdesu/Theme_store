@@ -2,7 +2,6 @@
 
 import Base from '../../themestore/controller/base.js';
 import request from 'request';
-import qs from 'qs';
 let oauth = {
   client_id:'efaf9351830c99050b36',
   client_secret:'de4650427964ecce1b35cd41ccbed8907b7e5fd4',
