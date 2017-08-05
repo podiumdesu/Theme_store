@@ -16,7 +16,7 @@ export default class extends Base {
     let version = false;
     let themeModel = this.model('theme');
     version = await readFileAsync(release).catch(() => false);
-    this.assign({latest: version,state:this.http.url});
+    this.assign({latest: version,state:encodeURIComponent(this.http.url)});
 
 
     //auto render template file index_index.html

@@ -39,7 +39,6 @@
             <ul>
               <li><a href="/themestore/theme/index">Theme List</a></li>
               <li><a href="/themestore/upload/index">Upload Your Theme</a></li>
-              <li><a href="/themestore/mytheme/index">My Theme</a></li>
             </ul>
           </li>
           <li><a href="https://github.com/firekylin/firekylin/issues/34">Users</a></li>
@@ -47,16 +46,14 @@
           <li><a href="https://github.com/firekylin/firekylin/wiki">Documentation</a></li>
           {% if userInfo.user_loginname%}
           <li class="dropmenu usercenter">
-            <a href="javascript:void(0)" class="themestore active">
               {% if userInfo.user_name %}
-              <i>{{userInfo.user_name}}</i>
+              <a href="javascript:void(0)" class="themestore active">{{userInfo.user_name}}</a>
               {% else %}
-              <i>{{userInfo.user_loginname}}</i>
+              <a href="javascript:void(0)" class="themestore active">{{userInfo.user_loginname}}</a>
               {% endif %}
-            </a>
             <ul>
-              <li><a href="/user/personal/index">个人中心</a></li>
-              <li><a id="logout">注销</a></li>
+              <li><a href="/user/personal/index">Personal Center</a></li>
+              <li><a id="logout">log out</a></li>
             </ul>
           </li>
         {% else %}
@@ -97,12 +94,12 @@
               {% endif %}
             </a>
             <ul>
-              <li><a href="/user/personal/index">个人中心</a></li>
-              <li><a id="logout">注销</a></li>
+              <li><a href="/user/personal/index">Personal Center</a></li>
+              <li><a id="logout">Log out</a></li>
             </ul>
           </li>
         {% else %}
-          <li><a href="https://github.com/login/oauth/authorize?client_id={{clientId}}&scope=user,public_repo" target="view_window">Log in</a></li>
+          <li><a href="https://github.com/login/oauth/authorize?client_id={{clientId}}&scope=user,public_repo&state={{state}}" target="view_window">Log in</a></li>
         {% endif %}
         </ul>
       </div>

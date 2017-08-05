@@ -36,7 +36,7 @@
 .pages.fixed-bottom{position:fixed;bottom:20px;}
 #filter {padding:0 10px;height: 40px;}
 #filter>li{position: relative;}
-#filter ul{width: auto;top: 0px;transition:none;left: 5px;}
+// #filter ul{width: auto;top: 0px;transition:none;left: 5px;}
 #filter label{line-height: 40px;}
 #filter .dropmenu:hover>a,.filter .dropmenu:hover>a{box-shadow: none;background-color: transparent!important;}
 #filter .order{display: inline-block;position: relative;padding:10px 5px;}
@@ -44,3 +44,5 @@
 #filter .search-bounce{position: relative;padding: 10px;}
 #dd-page{border: none;border-bottom: 1px solid rgba(0,0,0,.7);background-color: transparent;}
 .transparent-btn{outline:0;position: absolute;z-index: -1;width: 30px;height: 40px;top: 4px;background-color: transparent;right: 0;border:none;}
+.pageinfo{text-align: right;margin: 5px 0}
+.pageinfo span.text{margin: 10px;}

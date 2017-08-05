@@ -64,7 +64,7 @@ export default class extends Base {
         //但是检测一下版本号吧，如果版本号一样，就让用户更新一下？还是不检测算了。。。只有提示。就仅仅在更新成功时判断一下好了。
         else {
           let insertId = await themeList.add({theme_uid:uid.newGUID(),theme_authoruid:currentUser.user_uid,theme_authorname:currentUser.user_name,
-          theme_version:jsonObj.version,theme_filesrc:name+'.zip',theme_name:name,theme_imgsrc:name,theme_marking:0.0,theme_tags:jsonObj.tags,
+          theme_version:jsonObj.version,theme_filesrc:encodeURIComponent(name)+'.zip',theme_name:name,theme_imgsrc:name,theme_marking:0.0,theme_tags:jsonObj.tags,
           theme_description:jsonObj.description,theme_downloadtimes:0,theme_lastupdated:myDate.toLocaleDateString()});
           res = 'upload';
           //return this.success('upload');
@@ -76,8 +76,8 @@ export default class extends Base {
         fs.writeFileSync(think.RESOURCE_PATH + '/static/img/'+name+'.png', imgContent);
         //let basename = themefile.originalFilename;//因为本系统不允许上传同名主题，所以文件名就直接使用主题名
         //将上传的文件（路径为filepath的文件）移动到第二个参数所在的路径，并改为第二个参数的文件名。
-        fs.renameSync(filepath, uploadpath + '/' + name+'.zip');
-        themefile.path = uploadpath + '/' + name;
+        fs.renameSync(filepath, uploadpath + '/' + encodeURIComponent(name)+'.zip');
+        themefile.path = uploadpath + '/' + encodeURIComponent(name);
         return this.success(res);
       //} 
     }

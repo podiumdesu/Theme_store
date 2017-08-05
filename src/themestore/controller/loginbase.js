@@ -8,9 +8,9 @@ export default class extends think.controller.base {
    	this._userInfo = await this.session('userInfo');
       this._listModel = this.model('list');
       this._clientId = 'efaf9351830c99050b36';
-      this.assign({clientId:this._clientId,state:this.http.url});
+      this.assign({clientId:this._clientId,state:encodeURIComponent(this.http.url)});
        if(think.isEmpty(this._userInfo)){
-         return this.fail();
+         return this.fail('Please log in!');
        }
       this.assign('userInfo',this._userInfo);
    }

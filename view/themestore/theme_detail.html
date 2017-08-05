@@ -1,9 +1,11 @@
 {% extends "./parent.html" %}
+{% block title %}{{data.theme_name}}--Firekylin{% endblock %}
 {% block style %}
 <style>
 .theme-title a{display: inline-block;float:right;margin:20px 0 10px;font-size: 20px;line-height: 30px;}
 .article{border: 1px solid #f5f5f5;}
 .flex-box{display: flex;}
+.toolbar{justify-content: space-between;}
 .article-left{width: 60%;margin-right: 20px;}
 .aside-right{width: 40%;padding-left: 20px;}
 i.fa.fa-star {color: #FFD600;}
@@ -15,34 +17,57 @@ i.fa.fa-star {color: #FFD600;}
 .table-td{display: table-cell;}
 .table-td:last-child{text-align: right;}
 .info-box{margin: 10px 0;border-top: 1px solid #f3f3f3;padding: 10px 0;}
+.info-box a{display: inline-flex;flex-wrap: nowrap;}
 .p-indent{text-indent: 2em;}
+.btn-group{width: 100%;}
+.btn-group .btn{width: 50%;}
+@media screen and (max-width: 650px) {
+  .media.flex-box{flex-direction: column;}
+  .article-left,.aside-right{width: 100%;padding-left: 0;}
+}
 </style>
 {% endblock %}
 {% block CurrentDescription %}by {{data.theme_authorname}}{% endblock %}
 {% block content %}
 <input type="hidden" id="themename" value="{{data.theme_name}}">
+<input type="hidden" id="thememmuid" value="{{data.theme_authoruid}}">
+<input type="hidden" id="firstOrLast" value="{{data.step}}">
+<input type="hidden" id="themeid" value="{{data.theme_id}}">
 <div class="content">
   <div class="article">
-    <div class="flex-box">
+    <div class="toolbar flex-box">
+      <a href="{{url}}" class="btn btn-primary inlineBlock">
+        <span><i class="fa fa-undo"></i></span>
+        <span>back</span>
+      </a>
+      <div class="right">
+        <a href="javascript:void(0)" class="btn-primary btn inlineBlock" id="stepBefore" disabled>&lt;</a>
+        <a href="javascript:void(0)" class="btn-primary btn inlineBlock" id="stepNext" disabled>&gt;</a>
+        {% if data.theme_authoruid === userInfo.user_uid %}
+        <a href="javascript:void(0)" class="btn-alert btn inlineBlock" id="deleteTheme" data-filesrc="{{data.theme_filesrc}}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="media flex-box">
       <article class="article-left">
         <div class="theme-img">
           <img src="/static/img/{{data.theme_imgsrc}}.png" alt="{{data.theme_name}}">
         </div>
         <article class="theme-description">
           {% if data.descriptionExist %}
-          <header><h4>Description:</h4></header>
+          <header><h4 class="primary-text">Description:</h4></header>
           <div class="info-box">
             <p class="p-indent">{{data.theme_description}}</p> 
           </div>       
           {% else %}          
-          <header><h4 class="inlineBlock">Description:</h4><span>None</span></header>
+          <header><h4 class="inlineBlock primary-text">Description:</h4><span>None</span></header>
           {% endif %}
         </article>
       </article>
       <aside class="aside-right">
         <div class="btn-group">
           <a href="javascript:void(0)" class="btn btn-default" id="preview">Preview</a>
-          <a href="/themestore/theme/download/themename/{{data.theme_filesrc}}/times/{{data.theme_downloadtimes}}" class="btn btn-primary">Download</a>
+          <a href="/themestore/theme/download/filename/{{data.theme_filesrc}}/times/{{data.theme_downloadtimes}}" class="btn btn-primary">Download</a>
         </div>
         <div class="info-box">
           <p class="theme-lastUpdated table-tr">
@@ -60,7 +85,7 @@ i.fa.fa-star {color: #FFD600;}
         </div>
         <article class="marking">
           <header>
-            <h4 class="inlineBlock">Marking:</h4>
+            <h4 class="inlineBlock primary-text">Marking:</h4>
             <div class="inlineBlock" id="star"></div>
           </header>
           <div class="info-box">
@@ -74,21 +99,17 @@ i.fa.fa-star {color: #FFD600;}
         </article>
         <article class="theme-tags">
           {% if data.tagsExist %}
-          <header><h4>Tags:</h4></header>
+          <header><h4 class="primary-text">Tags:</h4></header>
           <div class="info-box">
-          {% if data.tagsExist %}
             {% for item in data.theme_tags %}
               <a href="/themestore/theme/index/search/{{item}}/searchType/tags" class="item">{{item}}</a>,
             {% endfor %}
             {% if data.theme_lastTags %}
               <a href="/themestore/theme/index/search/{{data.theme_lastTags}}/searchType/tags" class="item">{{data.theme_lastTags}}</a>
-            {% endif %}          
-          {% else %}
-            <p class="p-indent">None</p>
-          {% endif %}
+            {% endif %}
           </div>      
           {% else %}          
-          <header><h4 class="inlineBlock">Tags:</h4><span>None</span></header></header>
+          <header><h4 class="inlineBlock primary-text">Tags:</h4><span>None</span></header></header>
           {% endif %}
         </article>
       </aside>
@@ -98,37 +119,5 @@ i.fa.fa-star {color: #FFD600;}
 {% endblock %}
 
 {% block script %}
-<script type="text/javascript">
-let themename = document.getElementById('themename'),
-    marking = document.getElementById('marking'),
-    num = document.getElementById('num');
-let sr = new StarRank({
-  container:'#star',
-  rank:marking.innerText,
-  rankCustom(index){
-    let str = $.param({rank:index,themename:themename.value});
-    let rank;
-    $.ajax({
-        url:'/themestore/mytheme/rank',
-        type:'POST',
-        dataType:'JSON',
-        data:str,
-        async:false,
-        success:function(res){
-          if(!res.errno) {
-            rank = Math.round(res.data.rank);
-            marking.innerText = res.data.rank;
-            num.innerText = res.data.markingnum;
-          }
-          else{
-            alert('Please log in before rating!');
-            rank = 'orRank';
-          }
-        }
-      });
-    return rank;
-  }
-});
-</script>
-  <script src="/static/js/themedetail.js"></script>
+<script src="/static/js/themedetail.js"></script>
 {% endblock %}

@@ -1,11 +1,12 @@
 {% extends "./parent.html" %}
+{% block title %}Theme List--Firekylin{% endblock %}
 {% block style %}
 <link rel="stylesheet" href="/static/css/themelist.css">
 {% endblock %}
 {% block CurrentDescription %}The gallary of wonderful themes and you can download whichever you like{% endblock %}
 {% block customNav %}
 <li>
-  <a class="inlineBlock" style="color: #fff;cursor: auto;">Order by </a>
+  <a class="inlineBlock" style="color: rgba(0, 0, 0, 0.7);cursor: auto;">Order by </a>
   <div id="dd" class="wrapper-dropdown-3 inlineBlock" tabindex="1">
     <span>Popular</span>
     <ul class="dropdown">
@@ -22,19 +23,30 @@
       <button class="transparent-btn" type="submit"></button>
   </form>
 </li>
+<li><a href="/themestore/theme/index" class="primary-text">Select All</a></li>
 {% endblock %}
 
 {% block content %}
 <div class="content">
     <ul id="filter">
-      <label class="inlineBlock float-left">Order by </label>
-      <li class="dropmenu float-left">
-        <a href="javascript:void(0)" class="order themestore active">Popular</a>
+      <li class="float-left">
+        <label >Order by </label>
+        <div id="dd2" class="wrapper-dropdown-3 inlineBlock" tabindex="1">
+          <span>Popular</span>
+          <ul class="dropdown">
+            <li data-href="theme_downloadtimes"><a data-href="theme_downloadtimes" class="type">Popular</a></li>
+            <li data-href="theme_marking"><a data-href="theme_marking" class="type">Acclaimed</a></li>
+            <li data-href="theme_lastupdated"><a data-href="theme_lastupdated" class="type">Latest</a></li>
+          </ul>
+        </div>
+      </li>
+      <!-- <li class="dropmenu float-left"> -->
+        <!-- <a href="javascript:void(0)" class="order themestore active">Popular</a>
         <ul>
           <li data-href="theme_downloadtimes"><a data-href="theme_downloadtimes" class="type">Popular</a></li>
           <li data-href="theme_marking"><a data-href="theme_marking" class="type">Acclaimed</a></li>
           <li data-href="theme_lastupdated"><a data-href="theme_lastupdated" class="type">Latest</a></li>
-        </ul>
+        </ul> -->
       </li>
         <li class="search-input float-right">
           <form class="inlineBlock" action="/themestore/theme/index" method="get">
@@ -42,12 +54,13 @@
               <a href="javascript:void(0)" class="inlineBlock search-bounce"><i class="fa fa-search" aria-hidden="true"></i></a>
               <button class="transparent-btn" type="submit"></button>
           </form>
+          <a href="/themestore/theme/index" class="inlineBlock primary-text">Select All</a>
         </li>
     </ul>
     <div class="list">
       {% for item in themelist.data %}
       <div class="item">
-        <a href="/themestore/theme/detail/themename/{{item.theme_name}}/pagestate/theme">
+        <a href="/themestore/theme/detail/themename/{{item.theme_name}}/state/{{currentUrl}}">
         <div class="item-img">
           <img src="/static/img/{{item.theme_imgsrc}}.png" alt="{{item.theme_imgsrc}}">
         </div>
@@ -64,15 +77,19 @@
         <p>There are no downloadable themes yet!</p>
       {% endfor %}
     </div>
+    <div class="pageinfo">
+      <span class="bold">page:</span><span class="text">{{themelist.currentPage}}</span>
+      <span class="bold">Total:</span><span class="text">{{themelist.totalPages}}</span>
+    </div>
     <div class="pages">
       <ul id="page">
-        <li id="previous"><a>&lt&lt</a></li>
+        <li id="previous"><a>&lt;&lt;</a></li>
           {% for item in page %}
             <li class="page" data-href="{{item}}"><a href="javascript:void(0)">{{item}}</a></li>
           {% else %}
             <li class="page" data-href="1"><a href="javascript:void(0)">1</a></li>
           {% endfor %}
-        <li id="next" data-total="{{themelist.totalPages}}"><a href="javascript:void(0)">&gt&gt</a></li>
+        <li id="next" data-total="{{themelist.totalPages}}"><a href="javascript:void(0)">&gt;&gt;</a></li>
       </ul>
     </div>
 </div>

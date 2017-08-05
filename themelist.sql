@@ -9,7 +9,6 @@ CREATE TABLE `ts_list` (
   `theme_filesrc` varchar(255) NOT NULL,
   `theme_name` varchar(255) NOT NULL,
   `theme_imgsrc` varchar(255) NOT NULL,
-  `theme_marking` float(2,1) NOT NULL,
   `theme_tags` varchar(1000) DEFAULT '',
   `theme_description` varchar(1000) DEFAULT '',
   `theme_downloadtimes` smallint(10) NOT NULL,
@@ -29,4 +28,13 @@ CREATE TABLE `ts_user` (
     `user_mailbox` varchar(255) DEFAULT NULL,
     `user_tellphone` varchar(11) DEFAULT NULL,
     `user_city` varchar(100) DEFAULT NULL
+);
+
+DROP TABLES `ts_mark`;
+create table `ts_mark`(
+  `mark_id` int PRIMARY KEY AUTO_INCREMENT,
+  `mark_mumuid` varchar(36) NOT NULL,
+  `mark_themeuid` varchar(36) NOT NULL,
+  `theme_marking` float(2,1) NOT NULL,
+  `theme_markingnum` int(11) DEFAULT 0
 );

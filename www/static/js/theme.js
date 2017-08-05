@@ -1,4 +1,10 @@
 $(function(){
+	//判断页面高度设置page
+	let bodyH =document.body.offsetHeight,
+		windowH = window.innerHeight,
+		$page = $('.pages');
+	if(bodyH < windowH)	$page[0].className = 'pages fixed-bottom';
+	else $page[0].className = 'pages';
 	//dropmenu初始化
 	function ddActive($el,t){
 		switch (t){
@@ -18,6 +24,7 @@ $(function(){
 	let $ddPage = $('#filter .order'),
 		$dd = $('#dd'),
 		dd = new DropDown($('#dd'));
+		dd2 = new DropDown($('#dd2'));
 	ddActive($ddPage,t);
 	ddActive($dd.find('span'),t)
 	$('.page').click(function(){
@@ -60,23 +67,4 @@ $(function(){
 			defaultObj.setAttribute('class','active');
 		}
 	}
-	$('.delete-theme').click(function(){
-		if(confirm('Are you sure to delete this theme?')){
-			let filesrc = $(this).data('filesrc');
-			let str = $.param({filesrc:filesrc});
-			$.ajax({
-				url:'/themestore/mytheme/delete',
-				type:'POST',
-				dataType:'JSON',
-				data:str,
-				success:function(e){
-					if(!e.errno) {
-						alert('Delete successfully!');
-						window.location.reload();
-					}
-					else alert('Delete failed, please try again！');
-				}
-			});
-		}
-	});
 });

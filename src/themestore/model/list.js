@@ -12,6 +12,7 @@ export default class extends think.model.base {
     data.theme_lastupdated = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); 
     data.theme_tags = data.theme_tags.split(',');
     data.theme_lastTags = data.theme_tags.pop();//方便页面上显示时，用逗号隔开，且不显示最后一个的逗号
+    //data.theme_filesrc = encodeURIComponent(data.theme_filesrc);
     return data;
   }
 	/* 生成GUID码 */

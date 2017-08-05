@@ -1,16 +1,17 @@
 $(function(){
-	//判断页面高度设置页脚
-	let bodyH =document.body.offsetHeight,
-		windowH = window.innerHeight,
-		$page = $('.pages');
-	if(bodyH < windowH)	$page[0].className = 'pages fixed-bottom';
-	else $page[0].className = 'pages';
 	$('#backTop').click(function(e) {
 		e.preventDefault();
 		$('html,body').animate({
 			scrollTop: 0
 		}, 700);
 		return false;
+	});
+	$(document).click(function(event) {
+		$('.wrapper-dropdown-3').removeClass('active');
+		if(event.target.getAttribute('class') !== 'themestore active')	$('li.dropmenu').removeClass('active');
+	});
+	$('.dropmenu').click(function(e){
+		$(this).toggleClass('active');
 	});
 	$('.search-bounce').click(function(){
 		let $input = $(this).parent().find('input');
@@ -20,10 +21,6 @@ $(function(){
 		$input.focus();
 	});
 
-	$(document).click(function() {
-		// all dropdowns
-		$('.wrapper-dropdown-3').removeClass('active');
-	});
 	$('#order').click(function(event) {
 		$('.dropdown')[0].focus();
 	});
