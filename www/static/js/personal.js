@@ -8,7 +8,7 @@ $(function(){
 			data: $('form').serialize(),
 			success:res=>{
         		if(!res.errno) {
-        			alert('更新成功！');
+        			alert('Update Successfully！');
         			window.location.reload();
         		}
         		else alert(res.errmsg);
