@@ -5,8 +5,6 @@ import fs from 'fs';
 import path from 'path';
 import JSZip from 'jszip'
 
-let uid = new GUID();
-
 export default class extends Base {
   /**
    * index action
