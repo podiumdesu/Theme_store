@@ -50,7 +50,7 @@ export default class extends Base {
         list = sessionList || await this._listModel.order([type+' DESC']).select();
     //获取跳转前的url
     let url = this.get('state') || '/themestore/theme/index/type/'+type;
-    let themename = this.get('themename');
+    let themename = encodeURIComponent(this.get('themename'));
     let data = await this._listModel.getData(themename);//当前页面的data
     let min = list[list.length-1].theme_name,max = list[0].theme_name,minstr='',maxstr='';
     if(min===themename) data.step='last';
@@ -94,6 +94,7 @@ export default class extends Base {
     this.download(file);
   }
 }
-//存在问题：
-//step不能在有搜索的时候使用，且从index进来detail的时候没有极值disabled的设置
-//用户更改个人信息时，数据库里所有theme_authorname都要改，所以考虑取消theme_authorname，靠用户uid连表查；
+//线上版本存在问题：
+//上传中文主题不行
+//日期默认是0000-00-00，然后自动变成NAN
+//线上版本如何长期运行
