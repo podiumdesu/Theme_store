@@ -83,7 +83,7 @@ export default class extends Base {
       //data = await this._listModel.where(type+'<'+data[type]+' or '+type+'='+data[type]+' and theme_id >'+id).order([type+' DESC,theme_id ASC']).find();
     }
     themename = data.theme_name;
-    return this.redirect('/themestore/theme/detail/themename/'+encodeURIComponent(themename));
+    return this.redirect('/themestore/theme/detail/themename/'+themename);
   }
 
   async downloadAction(){

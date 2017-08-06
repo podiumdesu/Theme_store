@@ -41,11 +41,11 @@ i.fa.fa-star {color: #FFD600;}
         <span>back</span>
       </a>
       <div class="right">
-        <a href="javascript:void(0)" class="btn-primary btn inlineBlock" id="stepBefore" disabled>&lt;</a>
-        <a href="javascript:void(0)" class="btn-primary btn inlineBlock" id="stepNext" disabled>&gt;</a>
         {% if data.theme_authoruid === userInfo.user_uid %}
         <a href="javascript:void(0)" class="btn-alert btn inlineBlock" id="deleteTheme" data-filesrc="{{data.theme_filesrc}}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
         {% endif %}
+        <a href="javascript:void(0)" class="btn-primary btn inlineBlock" id="stepBefore" disabled>&lt;</a>
+        <a href="javascript:void(0)" class="btn-primary btn inlineBlock" id="stepNext" disabled>&gt;</a>
       </div>
     </div>
     <div class="media flex-box">
