@@ -49,7 +49,20 @@
         <li><a href="https://github.com/firekylin/firekylin/blob/master/CHANGELOG.md">Change Log</a></li>
         <li><a href="https://github.com/firekylin/firekylin/wiki">Documentation</a></li>
         {% if userInfo.user_loginname %}
-          <li class="userinfo">
+          <li class="dropmenu">
+            <a href="javascript:void(0)" class="themestore active">
+              {% if userInfo.user_name %}
+              <i>{{userInfo.user_name}}</i>
+              {% else %}
+              <i>{{userInfo.user_loginname}}</i>
+              {% endif %}
+            </a>
+            <ul>
+              <li><a href="/user/personal/index">Personal Center</a></li>
+              <li><a id="logout">log out</a></li>
+            </ul>
+          </li>
+          <!-- <li class="userinfo">
             <a href="javascript:void(0)" class="username">
               {% if userInfo.user_name %}
               <i>{{userInfo.user_name}}</i>
@@ -63,7 +76,7 @@
               <li><a href="/user/personal/index">Personal Center</a></li>
               <li><a id="logout">log out</a></li>
             </ul>
-          </li>
+          </li> -->
         {% else %}
           <li><a href="https://github.com/login/oauth/authorize?client_id={{clientId}}&scope=user,public_repo&state={{state}}">Log in</a></li>
         {% endif %}
