@@ -37,8 +37,8 @@ export default class extends Base {
       }
       this.assign({page:array});
     }
-    themeList.data = linq.from(themeList.data).forEach(x=>x.theme_name=decodeURIComponent(x.theme_name)).toArray();
-    sessionList = linq.from(themeList.data).forEach(x=>x.theme_name=decodeURIComponent(x.theme_name)).toArray();
+    themeList.data = linq.from(themeList.data).forEach(x=>x.theme_name=decodeURIComponent(x.theme_name));
+    sessionList = linq.from(themeList.data).forEach(x=>x.theme_name=decodeURIComponent(x.theme_name));
     await this.session('type',type);
     await this.session('sessionList',sessionList);
     this.assign({themelist:themeList,CurrentPageName:'Theme List',currentUrl:encodeURIComponent(currentUrl)});
