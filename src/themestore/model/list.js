@@ -7,8 +7,8 @@ export default class extends think.model.base {
   async getData(themename){
     let data = await this.where({theme_name: themename}).find();
     let d = new Date(data.theme_lastupdated);  
-    data.tagsExist = !!data.theme_tags;  
-    data.descriptionExist = !!data.theme_description;
+    data.tagsExist = data.theme_tags == null || data.theme_tags == '';  
+    data.descriptionExist = data.theme_description == undefined || data.theme_tags == '';
     data.theme_description = decodeURIComponent(data.theme_description);
     data.theme_lastupdated = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); 
     data.theme_tags = decodeURIComponent(data.theme_tags).split(',');
