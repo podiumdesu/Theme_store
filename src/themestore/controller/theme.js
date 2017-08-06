@@ -16,7 +16,6 @@ export default class extends Base {
     let themeList = {},sessionList,data=[];
     let type = this.get('type')?this.get('type'):'theme_downloadtimes';
     let page = this.get('page')?this.get('page'):'1';
-    themeList = await this._listMOdel.order([type+' DESC']).select();
     if(search){
       let searchText = '%'+search+'%';
       if(searchType === 'tags'){
