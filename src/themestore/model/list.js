@@ -15,6 +15,7 @@ export default class extends think.model.base {
     //data.theme_filesrc = encodeURIComponent(data.theme_filesrc);
     return data;
   }
+
 	/* 生成GUID码 */
     newGUID() {
       let date = new Date();
