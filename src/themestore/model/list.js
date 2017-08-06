@@ -16,7 +16,10 @@ export default class extends think.model.base {
     //data.theme_filesrc = encodeURIComponent(data.theme_filesrc);
     return data;
   }
-
+  formatDate(d){
+    d = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); 
+    return d;
+  }
 	/* 生成GUID码 */
     newGUID() {
       let date = new Date();

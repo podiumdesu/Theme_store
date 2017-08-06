@@ -53,9 +53,10 @@ export default class extends Base {
         if(!think.isEmpty(theme) && currentUser.user_uid !== theme.theme_authoruid) return this.fail(1000,'The theme has already existed.Please change the name and re-uploaded.');
         let res = 'update';
         let myDate = new Date();
+        myDate = themeList.formatDate(myDate);
         if(currentUser.user_uid === theme.theme_authoruid) {
           let insertId = await themeList.where({theme_name:name}).update({theme_authorname:currentUser.user_name,theme_version:jsonObj.version,theme_tags:encodeURIComponent(jsonObj.tags),
-          theme_description:encodeURIComponent(jsonObj.description),theme_lastupdated:myDate.toLocaleDateString()});
+          theme_description:encodeURIComponent(jsonObj.description),theme_lastupdated:myDate});
           //return this.success('update');
         }
         //这样子还要重新上传一遍，再进一遍这个方法，干脆想wordpress那样，不进行更新询问，直接更新吧！
@@ -63,7 +64,7 @@ export default class extends Base {
         else {
           let insertId = await themeList.add({theme_uid:themeList.newGUID(),theme_authoruid:currentUser.user_uid,theme_authorname:currentUser.user_name,
           theme_version:jsonObj.version,theme_filesrc:name+'.zip',theme_name:name,theme_imgsrc:name,theme_marking:0.0,theme_tags:encodeURIComponent(jsonObj.tags),
-          theme_description:encodeURIComponent(jsonObj.description),theme_downloadtimes:0,theme_lastupdated:myDate.toLocaleDateString()});
+          theme_description:encodeURIComponent(jsonObj.description),theme_downloadtimes:0,theme_lastupdated:myDate});
           res = 'upload';
           //return this.success('upload');
         } 
