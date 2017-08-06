@@ -33,3 +33,4 @@ output.tar.gz
 app/
 .DS_Store
 .vscode
+src/common/config/db.js
