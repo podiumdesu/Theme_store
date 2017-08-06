@@ -13,7 +13,7 @@ export default class extends Base {
     let currentUrl = this.http.url;//方便详情页返回
     let search = this.get('search');
     let searchType = this.get('searchType');
-    let themeList = {},sessionList;
+    let themeList = {},sessionList,data=[];
     let type = this.get('type')?this.get('type'):'theme_downloadtimes';
     let page = this.get('page')?this.get('page'):'1';
     if(search){
@@ -37,11 +37,12 @@ export default class extends Base {
       }
       this.assign({page:array});
     }
-    themeList.data = linq.from(themeList.data).forEach(x=>x.theme_name=decodeURIComponent(x.theme_name));
-    sessionList = linq.from(themeList.data).forEach(x=>x.theme_name=decodeURIComponent(x.theme_name));
+    //themeList.data = linq.from(themeList.data).orderByDescending("x=>x.theme_marking");
+    linq.from(themeList.data).forEach(x=>{x.theme_name = decodeURIComponent(x.theme_name);data.push(x);});
+    sessionList = linq.from(themeList.data).forEach("x=>x.theme_name=decodeURIComponent(x.theme_name)");
     await this.session('type',type);
     await this.session('sessionList',sessionList);
-    this.assign({themelist:themeList,CurrentPageName:'Theme List',currentUrl:encodeURIComponent(currentUrl)});
+    this.assign({themelist:data,CurrentPageName:'Theme List',currentUrl:encodeURIComponent(currentUrl)});
     return this.display();
   }
 
