@@ -39,8 +39,8 @@ export default class extends Base {
     }
     linq.from(themeList.data).forEach(x=>{x.theme_name = decodeURIComponent(x.theme_name);data.push(x);});
     themeList.data = data;
-    linq.from(themeList.data).forEach(x=>{x.theme_name = decodeURIComponent(x.theme_name);data2.push(x);});
-    sessionList = data2;
+    // linq.from(themeList.data).forEach(x=>{x.theme_name = decodeURIComponent(x.theme_name);data2.push(x);});
+    // sessionList = data2;
     await this.session('type',type);
     await this.session('sessionList',sessionList);
     this.assign({themelist:themeList,CurrentPageName:'Theme List',currentUrl:encodeURIComponent(currentUrl)});
@@ -51,7 +51,8 @@ export default class extends Base {
     //获取当前排序下的所有列表
     let type = await this.session('type') || 'theme_downloadtimes',
         sessionList = await this.session('sessionList'),
-        list = sessionList || await this._listModel.order([type+' DESC']).select();
+        list = sessionList || await this._listModel.order([type+' DESC']).select(),
+        utf8Themename = this.get('themename');
     //获取跳转前的url
     let url = this.get('state') || '/themestore/theme/index/type/'+type;
     let themename = encodeURIComponent(this.get('themename'));
@@ -62,7 +63,7 @@ export default class extends Base {
 
     //let pagestate = this.get('pagestate');//方便详情页返回上一页用
     await this.session('data',data);// /mytheme/rank中使用
-    this.assign({data: data,CurrentPageName:themename,type:type,url:url}); 
+    this.assign({data: data,CurrentPageName:utf8Themename,type:type,url:url}); 
     return this.display();
   }
 
