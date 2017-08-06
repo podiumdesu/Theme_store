@@ -17,7 +17,7 @@ export default class extends Base {
     let type = this.get('type')?this.get('type'):'theme_downloadtimes';
     let page = this.get('page')?this.get('page'):'1';
     if(search){
-      let searchText = '%'+search+'%';
+      let searchText = '%'+encodeURIComponent(search)+'%';
       if(searchType === 'tags'){
         themeList = await this._listModel.where({theme_tags: ['like', searchText]}).page(page,9).order([type+' DESC']).countSelect();
         sessionList = await this._listModel.where({theme_tags: ['like', searchText]}).order([type+' DESC']).select();
