@@ -15,6 +15,9 @@ input.form-control{border: none;box-shadow: none;border-bottom: 1px solid #ccc;b
 input.form-control:focus{box-shadow: none;border-color: rgb(0, 188, 212);}
 .form-group label{width: 20%;margin-right: 10px;text-align: right;}
 .form-group input{width: 75%;display: inline-block;}
+small{opacity:0;z-index:-1;transition:all .3s;display:none;margin-left:20%;padding-left:16px;padding-top:5px;color:#f50057;}
+form.error small{opacity:1;z-index:10;display:inline-block;}
+form.error #inputNickname{border-color:#f50057;}
 </style>
 {% endblock %}
 {% block CurrentDescription %}Please complete your infromation{% endblock %}
@@ -25,7 +28,8 @@ input.form-control:focus{box-shadow: none;border-color: rgb(0, 188, 212);}
     <form>
       <div class="form-group">
         <label for="inputNickname">Nickname</label>
-        <input type="text" class="form-control"  id="inputNickname" name="inputNickname" value="{{userInfo.user_name}}" pattern="^([A-Za-z0-9_])*$" required oninvalid="setCustomValidity('Please input letter,number or underline')">
+        <input type="text" class="form-control"  id="inputNickname" name="inputNickname" value="{{userInfo.user_name}}">
+        <small>please tab letter,number or underline</small>
       </div>
       <div class="form-group">
         <label for="inputEmail">Email</label>

@@ -9,7 +9,7 @@ $(function(){
 	function ddActive($el,t){
 		switch (t){
 			case 'theme_downloadtimes': $el.text('popular');break;
-			case 'theme_marking':$el.text('Acclaimed');break;
+			case 'theme_marking':$el.text('Liked');break;
 			case 'theme_lastupdated':$el.text('Latest');break;
 		}
 	}
@@ -25,7 +25,7 @@ $(function(){
 		$dd = $('#dd'),
 		dd = new DropDown($('#dd'));
 		dd2 = new DropDown($('#dd2'));
-	ddActive($ddPage,t);
+	ddActive($('#dd2').find('span'),t);
 	ddActive($dd.find('span'),t)
 	$('.page').click(function(){
 		let page = '/page/' + $(this).data('href');

@@ -19,7 +19,7 @@ i.fa.fa-star {color: #FFD600;}
 .info-box{margin: 10px 0;border-top: 1px solid #f3f3f3;padding: 10px 0;}
 .info-box a{display: inline-flex;flex-wrap: nowrap;}
 .p-indent{text-indent: 2em;}
-.btn-group{width: 100%;}
+.btn-group{width:100%;}
 .btn-group .btn{width: 50%;}
 @media screen and (max-width: 650px) {
   .media.flex-box{flex-direction: column;}
@@ -41,6 +41,10 @@ i.fa.fa-star {color: #FFD600;}
         <span>back</span>
       </a>
       <div class="right">
+	<!--<div class="btn-group">
+          <a href="javascript:void(0)" class="btn btn-default" id="preview">Preview</a>
+          <a href="/themestore/theme/download/filename/{{data.theme_filesrc}}/times/{{data.theme_downloadtimes}}" class="btn btn-primary">Download</a>
+        </div>-->
         {% if data.theme_authoruid === userInfo.user_uid %}
         <a href="javascript:void(0)" class="btn-alert btn inlineBlock" id="deleteTheme" data-filesrc="{{data.theme_filesrc}}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
         {% endif %}
@@ -65,7 +69,7 @@ i.fa.fa-star {color: #FFD600;}
         </article>
       </article>
       <aside class="aside-right">
-        <div class="btn-group">
+       <div class="btn-group">
           <a href="javascript:void(0)" class="btn btn-default" id="preview">Preview</a>
           <a href="/themestore/theme/download/filename/{{data.theme_filesrc}}/times/{{data.theme_downloadtimes}}" class="btn btn-primary">Download</a>
         </div>

@@ -1,7 +1,19 @@
 $(function(){
   //判断此主题是否为当前排序下的最前或最后
   let step = firstOrLast.value;
-  if(step != 'first'){
+ /* if(step != 'first'){
+ $('#stepBefore').removeAttr("disabled");
+    let str = $.param({id:themeid.value,themename:encodeURIComponent($(themename).val()),step:'before'});
+    beforeHandler = ()=>{$.post('/themestore/theme/step',str);}
+    stepBefore.addEventListener('click',beforeHandler);
+  }
+  if(step != 'last'){
+    $('#stepNext').removeAttr("disabled");
+    let str2 = $.param({id:themeid.value,themename:encodeURIComponent($(themename).val()),step:'next'});
+    nextHandler = ()=>{$.post('/themestore/theme/step',str2);}
+    stepNext.addEventListener('click',nextHandler);
+  }*/
+if(step != 'first'){
     $('#stepBefore').removeAttr("disabled");
     stepBefore.setAttribute('href',`/themestore/theme/step/id/${themeid.value}/themename/${themename.value}/step/before`);
   }
@@ -13,7 +25,7 @@ $(function(){
     container:'#star',
     rank:marking.innerText,
     rankCustom(index){
-      let str = $.param({rank:index,themename:themename.value,mmuid:thememmuid.value});
+      let str = $.param({rank:index,themename:$('#themename').val()});
       let rank;
       $.ajax({
           url:'/themestore/mytheme/rank',
@@ -24,8 +36,8 @@ $(function(){
           success:function(res){
             if(!res.errno) {
               rank = Math.round(res.data.rank);
-              marking.innerText = res.data.rank;
-              num.innerText = res.data.markingnum;
+              marking.innerText = res.data.avg;
+              num.innerText = res.data.num;
             }
             else{
               alert(res.errmsg);
@@ -50,7 +62,7 @@ $(function(){
   $('#deleteTheme').click(function(){
     if(confirm('Are you sure to delete this theme?')){
       let filesrc = encodeURIComponent($(this).data('filesrc'));
-      let str = $.param({filesrc:filesrc});
+      let str = $.param({filesrc:filesrc,mmuid:thememmuid.value});
       $.ajax({
         url:'/themestore/mytheme/delete',
         type:'POST',

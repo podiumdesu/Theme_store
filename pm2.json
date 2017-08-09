@@ -2,11 +2,11 @@
   "apps": [{
     "name": "firekylin.org",
     "script": "www/production.js",
-    "cwd": "/Users/lizheming/Desktop/workspace/firekylin//Users/lizheming/Desktop/workspace/firekylin/firekylin.org",
+    "cwd": "/home/limengzhao/Theme_store",
     "exec_mode": "cluster",
     "instances": 0,
     "max_memory_restart": "1G",
-    "autorestart": true,
+    "autorestart": false,
     "node_args": [],
     "args": [],
     "env": {

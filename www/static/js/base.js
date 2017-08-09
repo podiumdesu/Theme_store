@@ -20,7 +20,15 @@ $(function(){
 		$btn[0].style.zIndex = '10';
 		$input.focus();
 	});
-
+	$(document).click(function(event){
+		//console.log(event.target);
+		if(event.target != $('.search-bounce i')[1] && event.target != $('.search-input input')[1] && event.target != $('.search-input form')[1]){
+			let $input2 = $('.search-input input'),
+			    $btn2 = $('.search-input button');
+			$input2[1].className = 'inlineBlock';
+	                $btn2[1].style.zIndex = '-1';
+		}
+	});
 	$('#order').click(function(event) {
 		$('.dropdown')[0].focus();
 	});

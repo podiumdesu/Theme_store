@@ -5,7 +5,7 @@ import request from 'request';
 let oauth = {
   client_id:'efaf9351830c99050b36',
   client_secret:'de4650427964ecce1b35cd41ccbed8907b7e5fd4',
-  redirect_uri:'http://43.240.28.48:8787/user/login/callback'
+  redirect_uri:'http://43.240.28.48:8234/user/login/callback'
 };
 let url = 'https://github.com/login/oauth/access_token';
 

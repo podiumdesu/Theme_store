@@ -30,7 +30,6 @@ export default class extends Base {
       think.mkdir(uploadpath);//如果没有，创建该目录
       //think.mkdir(imgpath);
       //提取出用 ‘/' 隔开的path的最后一部分。
-
       let zip = await getZip(filepath);
       // let end = originalFilename.length - 4;
       // let themeName = originalFilename.slice(0,end);
@@ -48,7 +47,9 @@ export default class extends Base {
         let jsonFile = zip.file(/package.json/)[0];
         let jsonContent = await getFileContent(jsonFile,'string');//读json文件
         let jsonObj = JSON.parse(jsonContent);
-        let name =encodeURIComponent(jsonObj.name);
+        jsonObj.description = jsonObj.description || '';
+	jsonObj.tags = jsonObj.tags || '';
+	let name =encodeURIComponent(jsonObj.name);
         let theme = await themeList.where({theme_name:name}).find();
         if(!think.isEmpty(theme) && currentUser.user_uid !== theme.theme_authoruid) return this.fail(1000,'The theme has already existed.Please change the name and re-uploaded.');
         let res = 'update';
